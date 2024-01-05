@@ -6,16 +6,22 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 15:27:23 by kcouchma          #+#    #+#              #
-#    Updated: 2024/01/03 16:44:28 by kcouchma         ###   ########.fr        #
+#    Updated: 2024/01/04 16:25:14 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =						\
-			fractol
+			fractol			\
+			hooks			\
+			build
 
 BONUS_SRCS =				\
 
 INC_FILES = -I libft
+
+INC_ARCHIVES = libft/libft.a minilibx-linux-master/libmlx_Linux.a
+
+LINKS = -L minilibx-linux-master/ -lmlx -lXext -lX11
 
 SRC = $(addsuffix .c,$(SRCS))
 BSRC = $(addsuffix .c,$(BONUS_SRCS))
@@ -29,12 +35,10 @@ NAME = fractol
 
 all: $(NAME)
 
-minilibx-linux-master/libmlx_Linux.a :
-	make -C minilibx-linux-master/
-
-$(NAME) : $(OBJ) minilibx-linux-master/libmlx_Linux.a
+$(NAME) : $(OBJ)
 	make -C libft bonus
-	$(CC) -o $@ $(OBJ) libft/libft.a
+	make -C minilibx-linux-master/
+	$(CC) -o $@ $(OBJ) $(INC_ARCHIVES) $(LINKS)
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CCFLAGS) $(INC_FILES)
