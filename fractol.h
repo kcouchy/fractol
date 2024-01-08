@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:30:29 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/05 17:01:30 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:00:56 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,43 @@ typedef struct s_fractal
 	double	zy;
 	double	cx;
 	double	cy;
+	double	zoom;
 	double	offsetx;
 	double	offsety;
-	double	zoom;
+	int		colour;
 	int		div_thresh;
 }			t_fractal;
+
+/******************************************************************************/
+/* check_inputs.c                                                             */
+/******************************************************************************/
+
+/**
+ * @brief checks the inputs to see if they contain only numbers, can start with 
+ * either '-' or '+'.
+ * @param argc input
+ * @param argv input
+ * @return int returns 0 if all argv are fine, otherwise 
+ * error() (Prints "Error\n" to the standard output and returns 1).
+ */
+int		is_not_num(int argc, char **argv);
+
+/**
+ * @brief checks the inputs one at a time to see if they are a valid int.
+ * @param argv 
+ * @return long returns number is a valid int, otherwise returns -2147483649 
+ * (beyond min int so invalid).
+ */
+long	ftps_atoi(char *argv);
+
+/**
+ * @brief Runs all of the above check functions to make sure the input is valid.
+ * @param argc input
+ * @param argv input
+ * @return int returns 0 if all argv are fine, otherwise 1.
+ */
+int		ft_checkinputs(int argc, char **argv);
+
 
 /******************************************************************************/
 /* build.c                                                                    */
@@ -65,7 +97,7 @@ typedef struct s_fractal
 
 int		ft_build_mandelbrot(t_fractal *fractal);
 
-int		ft_build_julia(t_fractal *fractal);
+int		ft_build_julia(t_fractal *fractal, double cx, double cy);
 
 int 	ft_build(t_fractal *fractal);
 
@@ -87,7 +119,7 @@ int		ft_error(int type, t_fractal *fractal);
 
 void	ft_free(t_fractal *fractal);
 
-int		ft_set_struct(t_fractal *fractal, char **argv);
+int		ft_set_struct(t_fractal *fractal, int argc, char **argv);
 
 int		main(int argc, char **argv);
 

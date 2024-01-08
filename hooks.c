@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:46:32 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/05 18:08:20 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:04:16 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void ft_zoom(int button, int x,int y, t_fractal *fractal)
 int	ft_mouse_hook(int button, int x,int y, t_fractal *fractal)
 {
 	if (button == 4 || button == 5)
-		ft_zoom(button, x, y, fractal);
-	if (button == 1)
 	{
-		ft_printf("%d, %d\n", x, y);
+		ft_zoom(button, x, y, fractal);
+		ft_build(fractal);
 	}
-	ft_build(fractal);
+	if (button == 1)
+		ft_printf("x: %d, y: %d, colour: %d\n", x, y);
 	return (0);
 }
 

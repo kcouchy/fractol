@@ -6,11 +6,12 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 15:27:23 by kcouchma          #+#    #+#              #
-#    Updated: 2024/01/04 16:25:14 by kcouchma         ###   ########.fr        #
+#    Updated: 2024/01/08 18:10:28 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =						\
+			check_inputs	\
 			fractol			\
 			hooks			\
 			build
@@ -29,7 +30,7 @@ OBJ = $(addsuffix .o,$(SRCS))
 BOBJ = $(addsuffix .o,$(BONUS_SRCS))
 
 CC = cc
-CCFLAGS = -Wall -Wextra -Werror -g
+CCFLAGS = -Wall -Wextra -Werror -Ofast -g
 
 NAME = fractol
 
