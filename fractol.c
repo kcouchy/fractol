@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:15:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 16:16:46 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:55:34 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_error(int type, t_fractal *fractal)
 		ft_printf("\nInput error, choose a fractal:\n");
 		ft_printf(" 1. Mandelbrot\n	./fractol Mandelbrot \n");
 		ft_printf(" 2. Julia (option with 2 starting parameters).\n");
-		ft_printf("	./fractol Julia\n	./fractol Julia 0.3 0\n\n");
+		ft_printf("	./fractol Julia\n	./fractol Julia 0.3 0\n");
+		ft_printf(" 3. Burning Ship\n	./fractol BurningShip \n\n");
 	}
 	else if (type == 2)
 	{
@@ -57,8 +58,14 @@ int	ft_set_struct1(t_fractal *fractal, char **argv)
 		fractal->offsetx = - (((SIZEW / 2) + 200) / fractal->zoom);
 		fractal->offsety = - ((SIZEH / 2) / fractal->zoom);
 	}
+	if (ft_strncmp(argv[1], "BurningShip", 12) == 0)
+	{
+		fractal->zoom = 1000;
+		fractal->offsetx = - (((SIZEW / 2) + 1500) / fractal->zoom);
+		fractal->offsety = - ((SIZEH / 2) / fractal->zoom);
+	}
 	fractal->colour = 5000;
-	fractal->div_thresh = 300;
+	fractal->div_thresh = 100;
 	return (0);
 }
 
@@ -105,11 +112,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(fractal->p_window, ft_key_hook, fractal);
 	mlx_mouse_hook(fractal->p_window, ft_mouse_hook, fractal);
 	mlx_hook(fractal->p_window, 17, 1L << 17, ft_close, fractal);
-	if ((ft_strncmp(argv[1], "Mandelbrot", 11) == 0) || (ft_strncmp(argv[1],
-				"Julia", 6) == 0))
-		ft_build(fractal);
-	else
-		ft_error(1, fractal);
+	ft_build(fractal);
 	mlx_loop(fractal->p_mlx);
 	ft_free(fractal);
 	return (0);

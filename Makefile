@@ -6,7 +6,7 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 15:27:23 by kcouchma          #+#    #+#              #
-#    Updated: 2024/01/09 14:52:06 by kcouchma         ###   ########.fr        #
+#    Updated: 2024/01/09 18:15:30 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ = $(addsuffix .o,$(SRCS))
 BOBJ = $(addsuffix .o,$(BONUS_SRCS))
 
 CC = cc
-CCFLAGS = -Wall -Wextra -Werror -Ofast -g
+CCFLAGS = -Wall -Wextra -Werror -Ofast
 
 NAME = fractol
 

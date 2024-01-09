@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:50:41 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:26 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:07:43 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,29 @@ int	ft_build_julia(t_fractal *fractal, double cx, double cy)
 	return (0);
 }
 
+int	ft_build_ship(t_fractal *fractal)
+{
+	int		i;
+	double	temp;
+
+	i = 0;
+	fractal->zx = 0.0;
+	fractal->zy = 0.0;
+	fractal->cx = (fractal->x / fractal->zoom) + fractal->offsetx;
+	fractal->cy = (fractal->y / fractal->zoom) + fractal->offsety;
+	while (i < fractal->div_thresh && (fractal->zx * fractal->zx
+			+ fractal->zy * fractal->zy < __DBL_MAX__))
+	{
+		temp = fractal->zx * fractal->zx - fractal->zy * fractal->zy
+			+ fractal->cx;
+		fractal->zy = fabs(2. * fractal->zx * fractal->zy + fractal->cy);
+		fractal->zx = fabs(temp);
+		i++;
+	}
+	ft_colour_pixel(fractal, fractal->x, fractal->y, fractal->div_thresh - i);
+	return (0);
+}
+
 int	ft_build(t_fractal *fractal)
 {
 	fractal->x = 0;
@@ -81,6 +104,8 @@ int	ft_build(t_fractal *fractal)
 				ft_build_mandelbrot(fractal);
 			else if (ft_strncmp(fractal->name, "Julia", 6) == 0)
 				ft_build_julia(fractal, fractal->cx, fractal->cy);
+			else if (ft_strncmp(fractal->name, "BurningShip", 12) == 0)
+				ft_build_ship(fractal);
 			fractal->y++;
 		}
 		fractal->y = 0;

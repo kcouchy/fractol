@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:46:32 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 15:11:41 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:16:26 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,30 @@ int	ft_close(t_fractal *fractal)
 	exit (1);
 }
 
+void	ft_move(t_fractal *fractal, int keycode)
+{
+	if (keycode == XK_Left)
+		fractal->offsetx -= 20 / fractal->zoom;
+	if (keycode == XK_Right)
+		fractal->offsetx += 20 / fractal->zoom;
+	if (keycode == XK_Up)
+		fractal->offsety -= 20 / fractal->zoom;
+	if (keycode == XK_Down)
+		fractal->offsety += 20 / fractal->zoom;
+}
+
 int	ft_key_hook(int keycode, t_fractal *fractal)
 {
 	if (keycode == XK_Escape)
 	{
 		ft_free(fractal);
 		exit (1);
+	}
+	if (keycode == XK_Left || keycode == XK_Right || keycode == XK_Up
+		|| keycode == XK_Down)
+	{
+		ft_move(fractal, keycode);
+		ft_build(fractal);
 	}
 	return (0);
 }
@@ -61,14 +79,14 @@ int	ft_mouse_hook(int button, int x, int y, t_fractal *fractal)
 		ft_build(fractal);
 	}
 	if (button == 1)
-		ft_printf("x: %d, y: %d, colour: %d\n", x, y);
+	{
+		fractal->colour += 100;
+		ft_build(fractal);
+	}
+	if (button == 3)
+	{
+		fractal->colour -= 100;
+		ft_build(fractal);
+	}
 	return (0);
 }
-
-// 	// Left click: 1
-// 	// Right click: 2
-// 	// Middle click: 3
-// 	// Scroll up: 4
-// 	// Scroll down : 5
-// **   expose_hook(void *param);
-// **   loop_hook(void *param);

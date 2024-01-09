@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:30:29 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 15:50:59 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:16:42 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@
 # include "libft/libft.h"	/*includes my libft.h - ft_printf, getnextline*/
 # include "minilibx-linux-master/mlx.h" /*includes minilibx*/
 # include "X11/keysym.h"	/*includes keyboard button aliases*/
-// # include <math.h>
-// # include <pthread.h>
-# include <stdio.h>			/*includes printf for doubles*/
+# include <math.h>			/*fabs*/
 
 /******************************************************************************/
 /* Defaults                                                                   */
@@ -76,12 +74,14 @@ typedef struct s_fractal
 int		is_not_num(int argc, char **argv);
 
 /**
- * @brief Runs all of the above check function and checks input validity.
+ * @brief Runs the above check function and checks input validity (names).
  * @param argc input
  * @param argv input
  * @return int returns 0 if all argv are fine, otherwise 1.
  */
 int		ft_checkinputs(int argc, char **argv);
+
+double	ft_atod2(char **argv, int fract);
 
 double	ft_atod1(char *argv);
 
@@ -96,6 +96,8 @@ int		ft_build_mandelbrot(t_fractal *fractal);
 
 int		ft_build_julia(t_fractal *fractal, double cx, double cy);
 
+int 	ft_build_ship(t_fractal *fractal);
+
 int 	ft_build(t_fractal *fractal);
 
 /******************************************************************************/
@@ -103,6 +105,10 @@ int 	ft_build(t_fractal *fractal);
 /******************************************************************************/
 
 int		ft_close(t_fractal *fractal);
+
+void	ft_move(t_fractal *fractal, int keycode);
+
+void	ft_zoom(int button, int x, int y, t_fractal *fractal);
 
 int		ft_key_hook(int keycode, t_fractal *fractal);
 

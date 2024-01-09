@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:14:33 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 16:27:13 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:23:14 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_not_num(int argc, char **argv)
 	return (0);
 }
 
-double	ftps_atoi(char **argv, int fract)
+double	ft_atod2(char **argv, int fract)
 {
 	double	num;
 	int		i;
@@ -76,12 +76,12 @@ double	ft_atod1(char *argv)
 	is_neg = -(2 * (*argv == '-') - 1);
 	if (*argv == '-' || *argv == '+')
 		argv++;
-	integer = ftps_atoi(&argv, 0);
+	integer = ft_atod2(&argv, 0);
 	if (integer == -2147483649)
 		return (-2147483649);
 	if (*argv == '.')
 		argv++;
-	fraction = ftps_atoi(&argv, 1);
+	fraction = ft_atod2(&argv, 1);
 	if (fraction == -2147483649)
 		return (-2147483649);
 	return (is_neg * (integer + fraction));
@@ -166,7 +166,8 @@ int	ft_checkinputs(int argc, char **argv)
 	if (argc != 2 && argc != 4)
 		return (1);
 	if ((ft_strncmp(argv[1], "Mandelbrot", 11) != 0)
-		&& (ft_strncmp(argv[1], "Julia", 6) != 0))
+		&& (ft_strncmp(argv[1], "Julia", 6) != 0)
+		&& (ft_strncmp(argv[1], "BurningShip", 12) != 0))
 		return (1);
 	if (argc > 2 && (ft_strncmp(argv[1], "Julia", 6) != 0))
 		return (1);
