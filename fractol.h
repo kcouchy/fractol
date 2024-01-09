@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:30:29 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/08 17:00:56 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:28:39 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "X11/keysym.h"	/*includes keyboard button aliases*/
 # include <math.h>
 # include <pthread.h>
+# include <stdio.h>			/*includes printf for doubles*/
 
 /******************************************************************************/
 /* Defaults                                                                   */
@@ -75,9 +76,10 @@ typedef struct s_fractal
 int		is_not_num(int argc, char **argv);
 
 /**
- * @brief checks the inputs one at a time to see if they are a valid int.
+ * @brief from the pushswap program. Checks the inputs one at a time to see if 
+ * they are a valid int.
  * @param argv 
- * @return long returns number is a valid int, otherwise returns -2147483649 
+ * @return long returns number if a valid int, otherwise returns -2147483649 
  * (beyond min int so invalid).
  */
 long	ftps_atoi(char *argv);
@@ -89,6 +91,8 @@ long	ftps_atoi(char *argv);
  * @return int returns 0 if all argv are fine, otherwise 1.
  */
 int		ft_checkinputs(int argc, char **argv);
+
+int		ft_atod(t_fractal *fractal, int argc, char **argv);
 
 
 /******************************************************************************/

@@ -6,12 +6,11 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:50:41 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/08 18:17:25 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:28:11 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 void	ft_colour_pixel(t_fractal *fractal, int x, int y, int i)
 {

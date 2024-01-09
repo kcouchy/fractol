@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:15:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/08 18:17:31 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:28:54 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ void	ft_free(t_fractal *fractal)
 
 int	ft_set_struct(t_fractal *fractal, int argc, char **argv)
 {
+	fractal->cx = 0;
+	fractal->cy = 0;
+	if (argc == 4 && (ft_strncmp(argv[1], "Julia", 6) == 0))
+	{
+		if (ft_atod(fractal, argc, argv) != 0)
+			return (ft_error(1, fractal));
+		// fractal->cx = (double)ft_atoi(argv[2]);
+		// fractal->cy = (double)ft_atoi(argv[3]);
+	}
 	fractal->name = argv[1];
 	fractal->p_mlx = mlx_init();
 	if (!fractal->p_mlx)
@@ -59,13 +68,6 @@ int	ft_set_struct(t_fractal *fractal, int argc, char **argv)
 	fractal->y = 0;
 	fractal->zx = 0;
 	fractal->zy = 0;
-	fractal->cx = 0;
-	fractal->cy = 0;
-	if (argc == 4 && (ft_strncmp(argv[1], "Julia", 6) == 0))
-	{
-		fractal->cx = (double)ft_atoi(argv[2]);
-		fractal->cy = (double)ft_atoi(argv[3]);
-	}
 	fractal->zoom = 300;
 	fractal->offsetx = - ((SIZEW / 2) / fractal->zoom);
 	fractal->offsety = - ((SIZEH / 2) / fractal->zoom);
