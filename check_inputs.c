@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:14:33 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 13:52:20 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:27:13 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_not_num(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	int k;
+	int	k;
 
 	i = 2;
 	k = 0;
@@ -29,11 +29,8 @@ int	is_not_num(int argc, char **argv)
 		while (argv[i][j])
 		{
 			if (argv[i][j] == '.')
-			{
 				k++;
-				j++;
-			}
-			if (argv[i][j] < '0' || argv[i][j] > '9' || k > 1)
+			else if (argv[i][j] < '0' || argv[i][j] > '9' || k > 1)
 				return (1);
 			j++;
 		}
@@ -44,48 +41,63 @@ int	is_not_num(int argc, char **argv)
 	return (0);
 }
 
+double	ftps_atoi(char **argv, int fract)
+{
+	double	num;
+	int		i;
+
+	num = 0.;
+	i = 0;
+	while (**argv && **argv != '.')
+	{
+		num *= 10.;
+		num += **argv - '0';
+		(*argv)++;
+		i++;
+	}
+	if (fract == 1)
+	{
+		while (i-- > 0)
+			num = num / 10.;
+	}
+	if (num <= 2147483647 && num >= -2147483648)
+		return (num);
+	return (-2147483649);
+}
+
+double	ft_atod1(char *argv)
+{
+	double	integer;
+	double	fraction;
+	int		is_neg;
+
+	integer = 0.;
+	fraction = 0.;
+	is_neg = -(2 * (*argv == '-') - 1);
+	if (*argv == '-' || *argv == '+')
+		argv++;
+	integer = ftps_atoi(&argv, 0);
+	if (integer == -2147483649)
+		return (-2147483649);
+	if (*argv == '.')
+		argv++;
+	fraction = ftps_atoi(&argv, 1);
+	if (fraction == -2147483649)
+		return (-2147483649);
+	return (is_neg * (integer + fraction));
+}
+
 int	ft_atod(t_fractal *fractal, int argc, char **argv)
 {
 	int		i;
-	int		j;
-	int		k;
-	double	integer;
-	double	fraction;
 	double	num;
-	int		is_neg;
 
 	i = 2;
 	while (i < argc)
 	{
-		j = 0;
-		k = 0;
-		integer = 0.;
-		fraction = 0.;
-		is_neg = 1;
-		if (argv[i][j] == '-' || argv[i][j] == '+')
-		{
-			if (argv[i][j] == '-')
-				is_neg = -1;
-			j++;
-		}
-		while (argv[i][j] != '.' && argv[i][j])
-		{
-			integer = (integer * 10.) + (argv[i][j] - '0');
-			j++;
-		}
-		if (argv[i][j] == '.')
-			j++;
-		while (argv[i][j])
-		{
-			fraction = (fraction * 10.) + (argv[i][j] - '0');
-			k++;
-			j++;
-		}
-		while (k-- > 0)
-			fraction = fraction / 10.;
-		num = integer + fraction;
-		if (is_neg == -1)
-			num = -num;
+		num = ft_atod1(argv[i]);
+		if (num == -2147483649)
+			return (1);
 		if (i == 2)
 			fractal->cx = num;
 		if (i == 3)
@@ -95,92 +107,55 @@ int	ft_atod(t_fractal *fractal, int argc, char **argv)
 	return (0);
 }
 
-// int	ft_find_dec(char *buffer)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (buffer[i])
-// 	{
-// 		if (buffer[i] == '.')
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (-1);
-// }
-
 // int	ft_atod(t_fractal *fractal, int argc, char **argv)
 // {
 // 	int		i;
-// 	char	*pos_dec;
-// 	int		integer;
-// 	int		fraction;
-// 	char	*inte;
-// 	char	*frac;
+// 	int		j;
+// 	int		k;
+// 	double	integer;
+// 	double	fraction;
+// 	double	num;
+// 	int		is_neg;
 
 // 	i = 2;
 // 	while (i < argc)
 // 	{
-// 		pos_dec = ft_find_dec(argv[i]);
-// 		if (pos_dec == -1)
+// 		j = 0;
+// 		k = 0;
+// 		integer = 0.;
+// 		fraction = 0.;
+// 		is_neg = 1;
+// 		if (argv[i][j] == '-' || argv[i][j] == '+')
 // 		{
-// 			integer = ftps_atoi(argv[i]);
-// 			fraction = 0;
+// 			if (argv[i][j] == '-')
+// 				is_neg = -1;
+// 			j++;
 // 		}
-// 		else
+// 		while (argv[i][j] != '.' && argv[i][j])
 // 		{
-// 			inte = ft_substr(char const *s, unsigned int start, size_t len)
-// 			integer = 
+// 			integer = (integer * 10.) + (argv[i][j] - '0');
+// 			j++;
 // 		}
-// // Allocates (with malloc(3)) and returns a substring from the
-// //  * string `str`. The substring begins at index `start` and is of maximum
-// //  * size `len`.
-// // 		*ft_substr(char const *s, unsigned int start, size_t len)
-
-// // Returns a pointer to the first occurence of `c` in `str` if it exists,
-// //  * `NULL` otherwise.
-// // 		char	*ft_strchr(const char *s, int c)
-
-// 		integer = ftps_atoi(argv[i]);
-// 		fraction = ftps_atoi(argv[i]);
-// 		if (integer == -2147483649 || fraction == -2147483649)
-// 			return (1);
-// 		else if (i == 3)
-// 			fractal->cx = integer + (10 to the power of strlen fraction * fraction
-// 		else if (i == 4)
-// 			fractal->cx = integer + (10 to the power of strlen fraction * fraction
+// 		if (argv[i][j] == '.')
+// 			j++;
+// 		while (argv[i][j])
+// 		{
+// 			fraction = (fraction * 10.) + (argv[i][j] - '0');
+// 			k++;
+// 			j++;
+// 		}
+// 		while (k-- > 0)
+// 			fraction = fraction / 10.;
+// 		num = integer + fraction;
+// 		if (is_neg == -1)
+// 			num = -num;
+// 		if (i == 2)
+// 			fractal->cx = num;
+// 		if (i == 3)
+// 			fractal->cy = num;
 // 		i++;
 // 	}
 // 	return (0);
-// }
-
-// long	ftps_atoi(char *argv)
-// {
-// 	long	num;
-// 	int		is_neg;
-
-// 	num = 0;
-// 	is_neg = 1;
-// 	ft_printf("%d\n", num);
-// 	if (*argv == '-' || *argv == '+')
-// 	{
-// 		if (*argv == '-')
-// 			is_neg = -1;
-// 		argv++;
-// 	}
-// 	if (!*argv)
-// 		return (-2147483649);
-// 	while (*argv)
-// 	{
-// 		num *= 10;
-// 		num += *argv - '0';
-// 		argv++;
-// 	}
-// 	if (is_neg == -1)
-// 		num = -num;
-// 	if (num <= 2147483647 && num >= -2147483648)
-// 		return (num);
-// 	return (-2147483649);
 // }
 
 int	ft_checkinputs(int argc, char **argv)
@@ -190,8 +165,8 @@ int	ft_checkinputs(int argc, char **argv)
 	num_nums = 0;
 	if (argc != 2 && argc != 4)
 		return (1);
-	if ((ft_strncmp(argv[1], "Mandelbrot", 11) != 0) &&
-			(ft_strncmp(argv[1], "Julia", 6) != 0))
+	if ((ft_strncmp(argv[1], "Mandelbrot", 11) != 0)
+		&& (ft_strncmp(argv[1], "Julia", 6) != 0))
 		return (1);
 	if (argc > 2 && (ft_strncmp(argv[1], "Julia", 6) != 0))
 		return (1);
@@ -199,28 +174,3 @@ int	ft_checkinputs(int argc, char **argv)
 		return (1);
 	return (0);
 }
-
-// int	ft_checkinputs(int argc, char **argv)
-// {
-// 	int		i;
-// 	int		num_nums;
-
-// 	num_nums = 0;
-// 	if (argc != 2 && argc != 4)
-// 		return (1);
-// 	if ((ft_strncmp(argv[1], "Mandelbrot", 11) != 0) &&
-// 			(ft_strncmp(argv[1], "Julia", 6) != 0))
-// 		return (1);
-// 	if (argc > 2 && (ft_strncmp(argv[1], "Julia", 6) != 0))
-// 		return (1);
-// 	if (is_not_num(argc, argv) == 1)
-// 		return (1);
-// 	i = 2;
-// 	while (i < argc)
-// 	{
-// 		if (ftps_atoi(argv[i]) == -2147483649)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }

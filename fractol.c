@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:15:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 13:28:54 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:16:46 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_error(int type, t_fractal *fractal)
 		ft_printf("\nInput error, choose a fractal:\n");
 		ft_printf(" 1. Mandelbrot\n	./fractol Mandelbrot \n");
 		ft_printf(" 2. Julia (option with 2 starting parameters).\n");
-		ft_printf("	./fractol Julia\n	./fractol Julia 0.4 0.2\n\n");
+		ft_printf("	./fractol Julia\n	./fractol Julia 0.3 0\n\n");
 	}
 	else if (type == 2)
 	{
@@ -42,28 +42,9 @@ void	ft_free(t_fractal *fractal)
 	free(fractal);
 }
 
-int	ft_set_struct(t_fractal *fractal, int argc, char **argv)
+int	ft_set_struct1(t_fractal *fractal, char **argv)
 {
-	fractal->cx = 0;
-	fractal->cy = 0;
-	if (argc == 4 && (ft_strncmp(argv[1], "Julia", 6) == 0))
-	{
-		if (ft_atod(fractal, argc, argv) != 0)
-			return (ft_error(1, fractal));
-		// fractal->cx = (double)ft_atoi(argv[2]);
-		// fractal->cy = (double)ft_atoi(argv[3]);
-	}
 	fractal->name = argv[1];
-	fractal->p_mlx = mlx_init();
-	if (!fractal->p_mlx)
-		return (ft_error(3, fractal));
-	fractal->p_window = mlx_new_window(fractal->p_mlx, SIZEW, SIZEH,
-			fractal->name);
-	if (!fractal->p_window)
-		return (free(fractal->p_mlx), ft_error(3, fractal));
-	fractal->p_image = mlx_new_image(fractal->p_mlx, SIZEW, SIZEH);
-	fractal->p_p_image = mlx_get_data_addr(fractal->p_image,
-			&fractal->pixelbits, &fractal->linesize, &fractal->endian);
 	fractal->x = 0;
 	fractal->y = 0;
 	fractal->zx = 0;
@@ -81,6 +62,33 @@ int	ft_set_struct(t_fractal *fractal, int argc, char **argv)
 	return (0);
 }
 
+int	ft_set_struct2(t_fractal *fractal, int argc, char **argv)
+{
+	fractal->cx = 0;
+	fractal->cy = 0;
+	if (argc == 4 && (ft_strncmp(argv[1], "Julia", 6) == 0))
+	{
+		if (ft_atod(fractal, argc, argv) == 1)
+			return (ft_error(1, fractal));
+	}
+	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
+	{
+		fractal->cx = 0.4;
+		fractal->cy = 0.4;
+	}
+	fractal->p_mlx = mlx_init();
+	if (!fractal->p_mlx)
+		return (ft_error(3, fractal));
+	fractal->p_window = mlx_new_window(fractal->p_mlx, SIZEW, SIZEH,
+			fractal->name);
+	if (!fractal->p_window)
+		return (free(fractal->p_mlx), ft_error(3, fractal));
+	fractal->p_image = mlx_new_image(fractal->p_mlx, SIZEW, SIZEH);
+	fractal->p_p_image = mlx_get_data_addr(fractal->p_image,
+			&fractal->pixelbits, &fractal->linesize, &fractal->endian);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fractal	*fractal;
@@ -91,7 +99,8 @@ int	main(int argc, char **argv)
 	fractal = malloc(sizeof(t_fractal));
 	if (!fractal)
 		return (ft_error(2, fractal));
-	if (ft_set_struct(fractal, argc, argv) == 1)
+	ft_set_struct1(fractal, argv);
+	if (ft_set_struct2(fractal, argc, argv) == 1)
 		return (free(fractal), 1);
 	mlx_key_hook(fractal->p_window, ft_key_hook, fractal);
 	mlx_mouse_hook(fractal->p_window, ft_mouse_hook, fractal);

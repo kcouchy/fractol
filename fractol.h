@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:30:29 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 13:28:39 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:50:59 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "libft/libft.h"	/*includes my libft.h - ft_printf, getnextline*/
 # include "minilibx-linux-master/mlx.h" /*includes minilibx*/
 # include "X11/keysym.h"	/*includes keyboard button aliases*/
-# include <math.h>
-# include <pthread.h>
+// # include <math.h>
+// # include <pthread.h>
 # include <stdio.h>			/*includes printf for doubles*/
 
 /******************************************************************************/
@@ -66,31 +66,24 @@ typedef struct s_fractal
 /******************************************************************************/
 
 /**
- * @brief checks the inputs to see if they contain only numbers, can start with 
- * either '-' or '+'.
+ * @brief Checks the inputs: can start with either 1 '-' or '+'. 
+ * May contain up to 1 decimal point.
+ * The rest of the word must consist of digits 0-9.
  * @param argc input
  * @param argv input
- * @return int returns 0 if all argv are fine, otherwise 
- * error() (Prints "Error\n" to the standard output and returns 1).
+ * @return int returns 0 if all argv are fine, otherwise 1.
  */
 int		is_not_num(int argc, char **argv);
 
 /**
- * @brief from the pushswap program. Checks the inputs one at a time to see if 
- * they are a valid int.
- * @param argv 
- * @return long returns number if a valid int, otherwise returns -2147483649 
- * (beyond min int so invalid).
- */
-long	ftps_atoi(char *argv);
-
-/**
- * @brief Runs all of the above check functions to make sure the input is valid.
+ * @brief Runs all of the above check function and checks input validity.
  * @param argc input
  * @param argv input
  * @return int returns 0 if all argv are fine, otherwise 1.
  */
 int		ft_checkinputs(int argc, char **argv);
+
+double	ft_atod1(char *argv);
 
 int		ft_atod(t_fractal *fractal, int argc, char **argv);
 
@@ -123,7 +116,8 @@ int		ft_error(int type, t_fractal *fractal);
 
 void	ft_free(t_fractal *fractal);
 
-int		ft_set_struct(t_fractal *fractal, int argc, char **argv);
+int		ft_set_struct1(t_fractal *fractal, char **argv);
+int		ft_set_struct2(t_fractal *fractal, int argc, char **argv);
 
 int		main(int argc, char **argv);
 

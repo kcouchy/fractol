@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:46:32 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/08 17:04:16 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:11:41 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,33 @@ int	ft_key_hook(int keycode, t_fractal *fractal)
 	}
 	return (0);
 }
-void ft_zoom(int button, int x,int y, t_fractal *fractal)
+
+void	ft_zoom(int button, int x, int y, t_fractal *fractal)
 {
 	double	zoom;
 
 	zoom = 1.2;
 	if (button == 4)
 	{
-		fractal->offsetx = (x / fractal->zoom + fractal->offsetx) -
-				(x / (fractal->zoom * zoom));
-		fractal->offsety = (y / fractal->zoom + fractal->offsety) -
-				(y / (fractal->zoom * zoom));
+		fractal->offsetx = (x / fractal->zoom + fractal->offsetx)
+			- (x / (fractal->zoom * zoom));
+		fractal->offsety = (y / fractal->zoom + fractal->offsety)
+			- (y / (fractal->zoom * zoom));
 		fractal->zoom *= zoom;
 	}
 	else if (button == 5)
 	{
-		fractal->offsetx = (x / fractal->zoom + fractal->offsetx) -
-				(x / (fractal->zoom / zoom));
-		fractal->offsety = (y / fractal->zoom + fractal->offsety) -
-				(y / (fractal->zoom / zoom));
+		fractal->offsetx = (x / fractal->zoom + fractal->offsetx)
+			- (x / (fractal->zoom / zoom));
+		fractal->offsety = (y / fractal->zoom + fractal->offsety)
+			- (y / (fractal->zoom / zoom));
 		fractal->zoom /= zoom;
 	}
 	else
 		return ;
 }
 
-int	ft_mouse_hook(int button, int x,int y, t_fractal *fractal)
+int	ft_mouse_hook(int button, int x, int y, t_fractal *fractal)
 {
 	if (button == 4 || button == 5)
 	{
