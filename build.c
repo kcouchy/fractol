@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:50:41 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 18:07:43 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:13:41 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_colour_pixel(t_fractal *fractal, int x, int y, int i)
 	temp[pixel] = i;
 }
 
-int	ft_build_mandelbrot(t_fractal *fractal)
+void	ft_build_mandelbrot(t_fractal *fractal)
 {
 	int		i;
 	double	temp;
@@ -43,10 +43,9 @@ int	ft_build_mandelbrot(t_fractal *fractal)
 		i++;
 	}
 	ft_colour_pixel(fractal, fractal->x, fractal->y, fractal->div_thresh - i);
-	return (0);
 }
 
-int	ft_build_julia(t_fractal *fractal, double cx, double cy)
+void	ft_build_julia(t_fractal *fractal)
 {
 	int		i;
 	double	temp;
@@ -54,8 +53,6 @@ int	ft_build_julia(t_fractal *fractal, double cx, double cy)
 	i = 0;
 	fractal->zx = (fractal->x / fractal->zoom) + fractal->offsetx;
 	fractal->zy = (fractal->y / fractal->zoom) + fractal->offsety;
-	fractal->cx = cx;
-	fractal->cy = cy;
 	while (i < fractal->div_thresh && (fractal->zx * fractal->zx
 			+ fractal->zy * fractal->zy < __DBL_MAX__))
 	{
@@ -66,10 +63,9 @@ int	ft_build_julia(t_fractal *fractal, double cx, double cy)
 		i++;
 	}
 	ft_colour_pixel(fractal, fractal->x, fractal->y, fractal->div_thresh - i);
-	return (0);
 }
 
-int	ft_build_ship(t_fractal *fractal)
+void	ft_build_ship(t_fractal *fractal)
 {
 	int		i;
 	double	temp;
@@ -89,10 +85,9 @@ int	ft_build_ship(t_fractal *fractal)
 		i++;
 	}
 	ft_colour_pixel(fractal, fractal->x, fractal->y, fractal->div_thresh - i);
-	return (0);
 }
 
-int	ft_build(t_fractal *fractal)
+void	ft_build(t_fractal *fractal)
 {
 	fractal->x = 0;
 	fractal->y = 0;
@@ -103,7 +98,7 @@ int	ft_build(t_fractal *fractal)
 			if (ft_strncmp(fractal->name, "Mandelbrot", 11) == 0)
 				ft_build_mandelbrot(fractal);
 			else if (ft_strncmp(fractal->name, "Julia", 6) == 0)
-				ft_build_julia(fractal, fractal->cx, fractal->cy);
+				ft_build_julia(fractal);
 			else if (ft_strncmp(fractal->name, "BurningShip", 12) == 0)
 				ft_build_ship(fractal);
 			fractal->y++;
@@ -113,5 +108,4 @@ int	ft_build(t_fractal *fractal)
 	}
 	mlx_put_image_to_window(fractal->p_mlx, fractal->p_window,
 		fractal->p_image, 0, 0);
-	return (0);
 }

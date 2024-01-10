@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:46:32 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 18:16:26 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:42:26 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	ft_zoom(int button, int x, int y, t_fractal *fractal)
 			- (y / (fractal->zoom / zoom));
 		fractal->zoom /= zoom;
 	}
-	else
-		return ;
 }
 
 int	ft_mouse_hook(int button, int x, int y, t_fractal *fractal)

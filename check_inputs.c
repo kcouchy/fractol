@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:14:33 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 17:23:14 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:27:01 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,57 +106,6 @@ int	ft_atod(t_fractal *fractal, int argc, char **argv)
 	}
 	return (0);
 }
-
-// int	ft_atod(t_fractal *fractal, int argc, char **argv)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		k;
-// 	double	integer;
-// 	double	fraction;
-// 	double	num;
-// 	int		is_neg;
-
-// 	i = 2;
-// 	while (i < argc)
-// 	{
-// 		j = 0;
-// 		k = 0;
-// 		integer = 0.;
-// 		fraction = 0.;
-// 		is_neg = 1;
-// 		if (argv[i][j] == '-' || argv[i][j] == '+')
-// 		{
-// 			if (argv[i][j] == '-')
-// 				is_neg = -1;
-// 			j++;
-// 		}
-// 		while (argv[i][j] != '.' && argv[i][j])
-// 		{
-// 			integer = (integer * 10.) + (argv[i][j] - '0');
-// 			j++;
-// 		}
-// 		if (argv[i][j] == '.')
-// 			j++;
-// 		while (argv[i][j])
-// 		{
-// 			fraction = (fraction * 10.) + (argv[i][j] - '0');
-// 			k++;
-// 			j++;
-// 		}
-// 		while (k-- > 0)
-// 			fraction = fraction / 10.;
-// 		num = integer + fraction;
-// 		if (is_neg == -1)
-// 			num = -num;
-// 		if (i == 2)
-// 			fractal->cx = num;
-// 		if (i == 3)
-// 			fractal->cy = num;
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 int	ft_checkinputs(int argc, char **argv)
 {

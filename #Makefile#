@@ -6,7 +6,7 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 15:27:23 by kcouchma          #+#    #+#              #
-#    Updated: 2024/01/10 12:30:59 by kcouchma         ###   ########.fr        #
+#    Updated: 2024/01/09 18:15:30 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ NAME = fractol
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	make -C libft/ bonus
+	make -C libft bonus
 	make -C minilibx-linux-master/
 	$(CC) -o $@ $(OBJ) $(INC_ARCHIVES) $(LINKS)
 
@@ -46,9 +46,9 @@ $(NAME) : $(OBJ)
 
 bonus : all
 
+
 clean :
-	make -C libft/ clean
-	make -C minilibx-linux-master/ clean
+	make -C libft clean
 	rm -rf $(OBJ) $(BOBJ)
 
 fclean : clean

@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:15:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/09 17:55:34 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:01:57 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_free(t_fractal *fractal)
 	free(fractal);
 }
 
-int	ft_set_struct1(t_fractal *fractal, char **argv)
+void	ft_set_struct1(t_fractal *fractal, char **argv)
 {
 	fractal->name = argv[1];
 	fractal->x = 0;
@@ -66,7 +66,6 @@ int	ft_set_struct1(t_fractal *fractal, char **argv)
 	}
 	fractal->colour = 5000;
 	fractal->div_thresh = 100;
-	return (0);
 }
 
 int	ft_set_struct2(t_fractal *fractal, int argc, char **argv)
