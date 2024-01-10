@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:30:29 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/10 14:01:45 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:16:48 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # include <stdlib.h>		/*malloc/free/calloc && exit*/
 # include <unistd.h>		/*write*/
-# include <fcntl.h>			/*open, close*/
 # include "libft/libft.h"	/*includes my libft.h - ft_printf, getnextline*/
 # include "minilibx-linux-master/mlx.h" /*includes minilibx*/
 # include "X11/keysym.h"	/*includes keyboard button aliases*/
@@ -121,7 +120,6 @@ double	ft_atod1(char *argv);
  */
 int		ft_atod(t_fractal *fractal, int argc, char **argv);
 
-
 /******************************************************************************/
 /* build.c                                                                    */
 /******************************************************************************/
@@ -170,7 +168,7 @@ void	ft_build_julia(t_fractal *fractal);
  * account any pixel offset or zoom).
  * @param fractal the fractal structure
  */
-void 	ft_build_ship(t_fractal *fractal);
+void	ft_build_ship(t_fractal *fractal);
 
 /**
  * @brief Checks the structure to extract the fractal type to build. Using a 
@@ -178,7 +176,7 @@ void 	ft_build_ship(t_fractal *fractal);
  * fractal calculations.
  * @param fractal the fractal structure
  */
-void 	ft_build(t_fractal *fractal);
+void	ft_build(t_fractal *fractal);
 
 /******************************************************************************/
 /* hooks.c                                                                    */
@@ -235,7 +233,7 @@ void	ft_zoom(int button, int x, int y, t_fractal *fractal);
  * @param fractal the fractal structure.
  * @return int return (0) because mlx_mouse_hook wants an int return.
  */
-int		ft_mouse_hook(int button, int x,int y, t_fractal *fractal);
+int		ft_mouse_hook(int button, int x, int y, t_fractal *fractal);
 
 /******************************************************************************/
 /* fractol.c                                                                  */
